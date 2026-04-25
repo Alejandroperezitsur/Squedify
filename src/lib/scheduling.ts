@@ -18,6 +18,7 @@ export function getAvailableSlots(
   appointments: Appointment[],
   serviceDuration: number
 ): TimeSlot[] {
+  if (!workingHours || !workingHours.start || !workingHours.end) return [];
   const dayStart = parseTime(workingHours.start);
   const dayEnd = parseTime(workingHours.end);
   const slots: TimeSlot[] = [];
@@ -134,6 +135,7 @@ export function detectDeadTime(
   appointments: Appointment[],
   minGap: number = 20
 ): DeadTimeBlock[] {
+  if (!workingHours || !workingHours.start || !workingHours.end) return [];
   const dayStart = parseTime(workingHours.start);
   const dayEnd = parseTime(workingHours.end);
 
@@ -229,6 +231,15 @@ export function calculateDayMetrics(
   occupancyRate: number;
   totalAppointments: number;
 } {
+  if (!workingHours || !workingHours.start || !workingHours.end) {
+    return {
+      totalSlots: 0,
+      occupiedSlots: 0,
+      deadTimeMinutes: 0,
+      occupancyRate: 0,
+      totalAppointments: 0,
+    };
+  }
   const dayStart = parseTime(workingHours.start);
   const dayEnd = parseTime(workingHours.end);
   const totalMinutes = (dayEnd.getTime() - dayStart.getTime()) / 60000;
