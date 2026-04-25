@@ -33,8 +33,8 @@ export default function SettingsPage() {
   const showToast = useUIStore((s) => s.showToast);
 
   const [name, setName] = useState(profile?.name || '');
-  const [startTime, setStartTime] = useState(profile?.workingHours.start || '09:00');
-  const [endTime, setEndTime] = useState(profile?.workingHours.end || '18:00');
+  const [startTime, setStartTime] = useState(profile?.workingHours?.start || '09:00');
+  const [endTime, setEndTime] = useState(profile?.workingHours?.end || '18:00');
   const [slotDuration, setSlotDuration] = useState(profile?.slotDuration || 30);
   const [daysOpen, setDaysOpen] = useState<number[]>(profile?.daysOpen || [1, 2, 3, 4, 5]);
   const [logo, setLogo] = useState(profile?.logo || '');
